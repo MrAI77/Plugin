@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "DAT Old Menu",
+  "version": "2.0",
+  "description": "Restores the classic DAT menu",
+  "content_scripts": [{
+    "matches": ["*://*.dat.com/*"],
+    "css": ["content.css"],
+    "js": ["content.js"],
+    "run_at": "document_end"
+  }],
+  "web_accessible_resources": [{
+    "resources": ["old-menu.html"],
+    "matches": ["*://*.dat.com/*"]
+  }],
+  "permissions": ["activeTab"]
+}
