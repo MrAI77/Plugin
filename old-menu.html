@@ -1,306 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filter Menu</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-        }
-
-        body {
-            background-color: #e5e7eb;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 280px;
-        }
-
-        .filter-menu {
-            background-color: #555555;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 1rem;
-        }
-
-        .header {
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #e5e7eb;
-            margin-bottom: 1rem;
-        }
-
-        .section {
-            background-color: #d9d9d9;
-            padding: 0.75rem;
-            border-radius: 0.375rem;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            margin-bottom: 1rem;
-        }
-
-        .section h3 {
-            color: #4b5563;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .slider-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .slider-group input[type="range"] {
-            flex: 1;
-            height: 0.5rem;
-            background-color: #bfdbfe;
-            border-radius: 9999px;
-            appearance: none;
-            cursor: pointer;
-        }
-
-        .slider-group input[type="range"]::-webkit-slider-thumb {
-            appearance: none;
-            width: 1rem;
-            height: 1rem;
-            background-color: #3b82f6;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .slider-group span {
-            font-size: 0.875rem;
-            color: #4b5563;
-        }
-
-        .trip-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .trip-input {
-            width: 100%;
-            padding: 0.25rem 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-
-        label {
-            display: block;
-            font-size: 0.875rem;
-            color: #4b5563;
-            margin-bottom: 0.25rem;
-        }
-
-        .equipment-inputs,
-        .company-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .input-group {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.875rem;
-        }
-
-        .input-group label {
-            width: 4rem;
-            margin-bottom: 0;
-        }
-
-        .input-group input[type="number"],
-        .input-group input[type="text"] {
-            width: 5rem;
-            padding: 0.25rem 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-        }
-
-        .input-group select {
-            flex: 1;
-            padding: 0.25rem 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-            background-color: white;
-        }
-
-        .input-group-full {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .input-group-full input {
-            width: 100%;
-            padding: 0.25rem 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-        }
-
-        .availability-inputs {
-            display: flex;
-            flex-direction: column;
-            gap: 0.25rem;
-        }
-
-        .availability-inputs input {
-            width: 100%;
-            padding: 0.25rem 0.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.25rem;
-            font-size: 0.875rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Filter Menu</title>
 </head>
-
 <body>
-    <div shadowroot="open">
-        <div class="container">
-            <div class="filter-menu">
-                <h2 class="header">REFINE YOUR SEARCH:</h2>
+  <div shadowroot="open">
+    <div class="container">
+      <div class="filter-menu">
+        <h2 class="header">REFINE YOUR SEARCH:</h2>
 
-                <!-- Age Section -->
-                <div class="section">
-                    <h3>AGE</h3>
-                    <div class="slider-group">
-                        <span id="ageValue">2</span>
-                        <span>hr</span>
-                        <input type="range" id="ageSlider" value="2" min="0" max="100">
-                    </div>
-                </div>
-
-                <!-- Trip Section -->
-                <div class="section">
-                    <h3>TRIP</h3>
-                    <div class="trip-inputs">
-                        <div>
-                            <label>Origin:</label>
-                            <input type="text" class="trip-input" placeholder="Origin" id="Origin">
-                        </div>
-                        <div>
-                            <label>DH-O:</label>
-                            <input type="text" class="trip-input" placeholder="DH-O" id="DH-O">
-                        </div>
-                        <div>
-                            <label>Destination:</label>
-                            <input type="text" class="trip-input" placeholder="Destination" id="Destination">
-                        </div>
-                        <div>
-                            <label>DH-D:</label>
-                            <input type="text" class="trip-input" placeholder="DH-D" id="DH-D">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Equipment Section -->
-                <div class="section">
-                    <h3>EQUIPMENT</h3>
-                    <div class="equipment-inputs">
-                        <div class="input-group">
-                            <label>Length:</label>
-                            <span>Under</span>
-                            <input type="text" id="dateInput" placeholder="Length">
-                            <span>ft</span>
-                        </div>
-                        <div class="input-group">
-                            <label>Weight:</label>
-                            <span>Under</span>
-                            <input type="text" id="dateInput" placeholder="Length">
-                            <span>lb</span>
-                        </div>
-                        <div class="input-group">
-                            <label>Full/Partial:</label>
-                            <select id="loadType">
-                                <option>Both</option>
-                                <option>Full</option>
-                                <option>Partial</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Availability Section -->
-                <div class="section">
-                    <h3>AVAILABILITY</h3>
-                    <div class="availability-inputs">
-                        <label>Date(s):</label>
-                        <input type="text" id="dateInput" placeholder="MM/DD">
-                    </div>
-                </div>
-
-                <!-- Company Section -->
-                <div class="section">
-                    <h3>COMPANY</h3>
-                    <div class="company-inputs">
-                        <div class="input-group">
-                            <label>MC #:</label>
-                            <span>Less than</span>
-                            <input type="text" placeholder="" id="mcInput">
-                        </div>
-                        <div class="input-group-full">
-                            <label>Show only names:</label>
-                            <input type="text" id="showNamesInput" placeholder="A.T. Logistics">
-                        </div>
-                        <div class="input-group-full">
-                            <label>Don't show names:</label>
-                            <input type="text" id="hideNamesInput" placeholder="Ex Logistics, ABC">
-                        </div>
-                    </div>
-                </div>
+        <!-- Trip Section -->
+        <div class="section">
+          <h3>TRIP</h3>
+          <div class="trip-inputs">
+            <div>
+              <label>Origin:</label>
+              <input type="text" class="trip-input" placeholder="Origin" id="Origin">
             </div>
+            <div>
+              <label>DH-O:</label>
+              <input type="text" class="trip-input" placeholder="DH-O" id="DH-O">
+            </div>
+            <div>
+              <label>Destination:</label>
+              <input type="text" class="trip-input" placeholder="Destination" id="Destination">
+            </div>
+            <div>
+              <label>DH-D:</label>
+              <input type="text" class="trip-input" placeholder="DH-D" id="DH-D">
+            </div>
+            <div>
+              <label>Equipment Type:</label>
+              <input type="text" class="trip-input" placeholder="e.g. Van, Reefer" id="EquipmentType">
+            </div>
+          </div>
         </div>
+
+        <!-- Equipment Section -->
+        <div class="section">
+          <h3>EQUIPMENT</h3>
+          <div class="equipment-inputs">
+            <div class="input-group">
+              <label>Length:</label>
+              <span>Under</span>
+              <input type="text" id="lengthInput" placeholder="Length">
+              <span>ft</span>
+            </div>
+            <div class="input-group">
+              <label>Weight:</label>
+              <span>Under</span>
+              <input type="text" id="weightInput" placeholder="Weight">
+              <span>lb</span>
+            </div>
+            <div class="input-group">
+              <label>Full/Partial:</label>
+              <select id="loadType">
+                <option>Full&Partial</option>
+                <option>Full</option>
+                <option>Partial</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Availability Section -->
+        <div class="section">
+          <h3>AVAILABILITY</h3>
+          <div class="availability-inputs">
+            <label>Date(s):</label>
+            <input type="text" id="dateInput" placeholder="MM/DD">
+          </div>
+        </div>
+
+        <!-- Search Button -->
+        <button id="searchBtn">Search</button>
+      </div>
     </div>
+  </div>
 </body>
-<script>
-    // Age slider
-    const ageSlider = document.getElementById('ageSlider');
-    const ageValue = document.getElementById('ageValue');
-
-    ageSlider.addEventListener('input', (e) => {
-        ageValue.textContent = e.target.value;
-    });
-
-    // Equipment inputs
-    const lengthInput = document.getElementById('lengthInput');
-    const weightInput = document.getElementById('weightInput');
-    const loadType = document.getElementById('loadType');
-
-    // Availability input
-    const dateInput = document.getElementById('dateInput');
-
-    // Company inputs
-    const mcInput = document.getElementById('mcInput');
-    const showNamesInput = document.getElementById('showNamesInput');
-    const hideNamesInput = document.getElementById('hideNamesInput');
-
-    // Initialize all input values
-    document.addEventListener('DOMContentLoaded', () => {
-        // Set initial values
-        ageValue.textContent = ageSlider.value;
-    });
-</script>
-
 </html>
